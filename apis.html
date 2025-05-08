@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APIs - Tama Group</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                green: {
+                    50: '#f0fdf4',
+                    100: '#dcfce7',
+                    200: '#bbf7d0',
+                    300: '#86efac',
+                    400: '#4ade80',
+                    500: '#22c55e',
+                    600: '#16a34a',
+                    700: '#15803d',
+                    800: '#166534',
+                    900: '#14532d',
+                },
+                emerald: {
+                    50: '#ecfdf5',
+                    100: '#d1fae5',
+                    200: '#a7f3d0',
+                    300: '#6ee7b7',
+                    400: '#34d399',
+                    500: '#10b981',
+                    600: '#059669',
+                    700: '#047857',
+                    800: '#065f46',
+                    900: '#064e3b',
+                },
+                teal: {
+                    50: '#f0fdfa',
+                    100: '#ccfbf1',
+                    200: '#99f6e4',
+                    300: '#5eead4',
+                    400: '#2dd4bf',
+                    500: '#14b8a6',
+                    600: '#0d9488',
+                    700: '#0f766e',
+                    800: '#115e59',
+                    900: '#134e4a',
+                },
+                purple: {
+                    50: '#faf5ff',
+                    100: '#f3e8ff',
+                    200: '#e9d5ff',
+                    300: '#d8b4fe',
+                    400: '#c084fc',
+                    500: '#a855f7',
+                    600: '#9333ea',
+                    700: '#7e22ce',
+                    800: '#6b21a8',
+                    900: '#581c87',
+                }
+            },
+            fontFamily: {
+                sans: ['Manrope', 'sans-serif'],
+                heading: ['Sora', 'sans-serif'],
+                logo: ['Montserrat', 'sans-serif']
+            },
+            boxShadow: {
+                'soft-xl': '0 20px 27px 0 rgba(0, 0, 0, 0.05)',
+                'soft-2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.08)',
+                'green-glow': '0 0 20px rgba(16, 185, 129, 0.2)',
+                'green-glow-lg': '0 0 30px rgba(16, 185, 129, 0.3)',
+            },
+        }
+    }
+}
+</script>
+<style>
+body {
+    font-family: 'Manrope', sans-serif;
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', sans-serif;
+}
+
+.products-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 300px;
+    background-color: white;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    border-radius: 0 0 16px 16px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 50;
+    display: block;
+}
+
+.products-dropdown-trigger:hover .products-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    display: block;
+}
+
+.logo-icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2), 0 2px 4px -1px rgba(16, 185, 129, 0.1);
+    overflow: hidden;
+}
+
+.hero-section {
+    background: linear-gradient(to bottom, rgba(6, 95, 70, 0.85), rgba(6, 78, 59, 0.9)), 
+                url('/placeholder.svg?height=1080&width=1920');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.hero-section > .container {
+    position: relative;
+    z-index: 2;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #10b981;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #10b981;
+    color: white;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    animation: shine 1.5s;
+}
+
+@keyframes shine {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    transition: all 0.3s ease;
+}
+
+.sticky-header.scrolled {
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.header-cta {
+    transition: all 0.3s ease;
+}
+
+.header-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2);
+}
+
+.logo-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: translateY(-2px);
+}
+
+.logo-icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #10b981, #065f46);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2), 0 2px 4px -1px rgba(16, 185, 129, 0.1);
+    overflow: hidden;
+}
+
+.logo-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    border-radius: 10px;
+}
+
+.logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #10b981, #059669);
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, #10b981 0%, #065f46 100%);
+}
+
+.clip-path-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+}
+
+.animate-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+  
+  .animate-fade-in.active {
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+  .api-item {
+      transition: all 0.3s ease;
+  }
+  
+  .api-item:hover {
+      background-color: #f0fdf4;
+      transform: translateY(-2px);
+  }
+
+  .letter-index {
+      position: sticky;
+      top: 100px;
+  }
+
+  .letter-link {
+      transition: all 0.2s ease;
+  }
+  
+  .letter-link:hover, .letter-link.active {
+      color: #10b981;
+      font-weight: bold;
+      transform: scale(1.2);
+  }
+
+  .search-highlight {
+      background-color: #bbf7d0;
+      padding: 0 2px;
+      border-radius: 2px;
+  }
+
+  .api-section {
+      scroll-margin-top: 100px;
+  }
+
+  .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 40;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+  }
+  
+  .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+  }
+
+  .social-icon {
+      transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .social-icon:hover {
+      transform: translateY(-3px);
+      color: white;
+      background-color: #10b981;
+  }
+</style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+<!-- Header -->
+<header class="sticky-header bg-white/95 backdrop-blur-md shadow-md w-full z-50">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+            <a href="index.html" class="logo-container">
+                <span class="text-2xl font-bold text-emerald-600 logo-text tracking-tight">TAMA GROUP</span>
+            </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Home</a>
+            <a href="who-we-are.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Who We Are?</a>
+
+            <a href="marketing.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Marketing</a>
+            
+            <!-- Products Dropdown Button -->
+            <div class="relative products-dropdown-trigger">
+              <button class="nav-link active text-emerald-600 font-medium transition-colors duration-300 flex items-center space-x-1 py-2">
+                  <span>Products</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+              </button>
+              
+              <!-- Products Dropdown Menu -->
+              <div class="products-dropdown">
+                  <div class="bg-white p-1 rounded-b-xl shadow-lg">
+                      <div class="bg-white rounded-xl overflow-hidden">
+                          <div class="grid grid-cols-1 gap-0">
+                              <!-- Excipients -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300 border-b border-gray-100">
+                                  <a href="excipients.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-flask text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">Excipients</h3>
+                                              <p class="text-xs text-gray-600">High-quality pharmaceutical excipients</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                              
+                              <!-- APIs -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300 border-b border-gray-100 bg-emerald-50">
+                                  <a href="apis.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-capsules text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">APIs</h3>
+                                              <p class="text-xs text-gray-600">Active Pharmaceutical Ingredients</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                              
+                              <!-- Mediclean -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300">
+                                  <a href="mediclean.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-pump-medical text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">Mediclean</h3>
+                                              <p class="text-xs text-gray-600">Advanced sanitization solutions</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            
+            <a href="contact-us.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Contact Us</a>
+            
+            <a href="contact-us.html" class="header-cta btn-primary px-5 py-2 rounded-full font-medium text-sm flex items-center shadow-green-glow">
+                Get Started
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+        
+        <!-- Mobile Navigation Button -->
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+    <div class="container mx-auto px-4 py-3 space-y-1">
+        <a href="index.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Home</a>
+        <a href="who-we-are.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Who We Are?</a>
+        <a href="about-us.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">About Us</a>
+        <a href="marketing.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Marketing</a>
+        
+        <div class="py-2 px-4 text-emerald-600 font-medium">Products</div>
+        <a href="excipients.html" class="block py-2 px-8 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">- Excipients</a>
+        <a href="apis.html" class="block py-2 px-8 text-emerald-600 font-medium border-l-2 border-emerald-500 bg-emerald-50">- APIs</a>
+        <a href="mediclean.html" class="block py-2 px-8 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">- Mediclean</a>
+        
+        <a href="contact-us.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Contact Us</a>
+        
+        <div class="pt-2 pb-4 px-4">
+            <a href="contact-us.html" class="btn-primary w-full text-center px-5 py-3 rounded-full font-medium flex items-center justify-center shadow-green-glow">
+                Get Started
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-section min-h-[40vh] flex items-center justify-center text-white clip-path-diagonal relative pt-20">
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+    <div class="absolute top-10 left-10 w-64 h-64 bg-emerald-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+</div>
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span class="bg-emerald-500 w-2 h-2 rounded-full mr-2"></span>
+            Active Pharmaceutical Ingredients
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            Our <span class="relative inline-block">
+                <span class="relative z-10">APIs</span>
+                <span class="absolute bottom-2 left-0 w-full h-3 bg-emerald-500/30 -z-10 transform -rotate-1"></span>
+            </span> Catalog
+        </h1>
+        <p class="text-xl mb-10 opacity-90 max-w-2xl mx-auto leading-relaxed">
+            Explore our comprehensive range of high-quality Active Pharmaceutical Ingredients for your formulation needs.
+        </p>
+    </div>
+</div>
+</section>
+
+<!-- Search Section -->
+<section class="py-12 bg-white">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+        <div class="bg-white rounded-xl shadow-soft-xl p-6 mb-8">
+            <div class="relative">
+                <input type="text" id="api-search" class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Search for an API...">
+                <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-gray-600">
+                <p id="search-results-count" class="hidden">Showing <span id="results-count">0</span> results</p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- APIs Catalog Section -->
+<section class="py-12 bg-gray-50">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row gap-8">
+        <!-- Alphabetical Index -->
+        <div class="md:w-1/6">
+            <div class="letter-index bg-white rounded-xl shadow-soft-xl p-4 text-center">
+                <h3 class="text-lg font-bold mb-4 text-gray-900">Index</h3>
+                <div class="grid grid-cols-3 md:grid-cols-1 gap-2">
+                    <a href="#section-a" class="letter-link text-gray-700 hover:text-emerald-600">A</a>
+                    <a href="#section-b" class="letter-link text-gray-700 hover:text-emerald-600">B</a>
+                    <a href="#section-c" class="letter-link text-gray-700 hover:text-emerald-600">C</a>
+                    <a href="#section-d" class="letter-link text-gray-700 hover:text-emerald-600">D</a>
+                    <a href="#section-e" class="letter-link text-gray-700 hover:text-emerald-600">E</a>
+                    <a href="#section-f" class="letter-link text-gray-700 hover:text-emerald-600">F</a>
+                    <a href="#section-g" class="letter-link text-gray-700 hover:text-emerald-600">G</a>
+                    <a href="#section-h" class="letter-link text-gray-700 hover:text-emerald-600">H</a>
+                    <a href="#section-i" class="letter-link text-gray-700 hover:text-emerald-600">I</a>
+                    <a href="#section-k" class="letter-link text-gray-700 hover:text-emerald-600">K</a>
+                    <a href="#section-l" class="letter-link text-gray-700 hover:text-emerald-600">L</a>
+                    <a href="#section-m" class="letter-link text-gray-700 hover:text-emerald-600">M</a>
+                    <a href="#section-n" class="letter-link text-gray-700 hover:text-emerald-600">N</a>
+                    <a href="#section-o" class="letter-link text-gray-700 hover:text-emerald-600">O</a>
+                    <a href="#section-p" class="letter-link text-gray-700 hover:text-emerald-600">P</a>
+                    <a href="#section-q" class="letter-link text-gray-700 hover:text-emerald-600">Q</a>
+                    <a href="#section-r" class="letter-link text-gray-700 hover:text-emerald-600">R</a>
+                    <a href="#section-s" class="letter-link text-gray-700 hover:text-emerald-600">S</a>
+                    <a href="#section-t" class="letter-link text-gray-700 hover:text-emerald-600">T</a>
+                    <a href="#section-u" class="letter-link text-gray-700 hover:text-emerald-600">U</a>
+                    <a href="#section-v" class="letter-link text-gray-700 hover:text-emerald-600">V</a>
+                    <a href="#section-x" class="letter-link text-gray-700 hover:text-emerald-600">X</a>
+                    <a href="#section-z" class="letter-link text-gray-700 hover:text-emerald-600">Z</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- API List -->
+        <div class="md:w-5/6">
+            <div id="api-list" class="bg-white rounded-xl shadow-soft-xl p-6">
+                <!-- Section A -->
+                <div id="section-a" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">A</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Abiraterone</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Acephyfilline</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Acetylsalicylic Acid</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Agomelatine</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Albendazole</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Alkylations</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amorolfine HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amoxicillin Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amoxicillin Sodium and Sulbactam Sodium（2：1）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amoxicillin Trihydrate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amoxicillin Trihydrate Compacted</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amoxicillin w.s.p.</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amoxicllin Trihydrate Powder</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amoxycillin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amphotericin B for Injection</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amphotericin B Oral</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ampicillin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ampicillin Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ampicillin Sodium and Sulbactam Sodium（2：1）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ampicillin Trihydrate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ampicillin Trihydrate Compacted</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amprolium HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amprolium hcl & ethopabate premix</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amprolium hcl premix</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Amprolium hcl w.s.p.</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Analgin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Anidulafungin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Articaine</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ascomycin ，FK520</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ascorbic Acid</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Aspartame</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Astragaloside</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Asymmetric synthesis</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Atropine Sulfate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Avermectin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Avilamycin premix</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Azlocillin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Azlocillin Sodium</div>
+                    </div>
+                </div>
+                
+                <!-- Section B -->
+                <div id="section-b" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">B</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Bacitracin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Bacitracin Zinc</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Baclofen</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Base / Citrate/ Phosphate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Bendamustine HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benserazide HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzathine Benzylpenicillin + 1% Lecithin + 0.2% Polysorbate80+10% Sodium Citrate Buffered （Sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzylpenicillin Benzathine （Sterile，1％Lecithin）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzylpenicillin Benzathine （Sterile，Polysorbate 80）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzylpenicillin Benzathine （Sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzylpenicillin Benzathine （Sterile，1％Lecithin，Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzylpenicillin Benzathine （Sterile，Polysorbate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzylpenicillin Benzathine ＋1% Lecithin + 0.2%</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzylpenicillin Potassium（sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Benzylpenicillin Sodium（sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Beta Thymidine</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Betamethasone Dipropionate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Betamethasone Valerate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Biotin pure / 2% feed grade</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Bortezomib</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Bromelain</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Brominations (Allylic and Dehydro brominations)</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Butafosfan</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Butyl Lithium Reactions</div>
+                    </div>
+                </div>
+                
+                <!-- Section C -->
+                <div id="section-c" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">C</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Caffeine anhydrous</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Calcium Ascorbate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Calcium Polystyrene Sulph</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Canagliflozin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Capreomycin Sulfate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Captopril</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Carbamazepine</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Caspofungin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Catalytic Hydrogenations</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefalexin（compacted）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefalexin（powder）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefalotin Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefamandole</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefathiamidine</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefazolin Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefdroxil（non-sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefepime Hydrochlorede</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefepime Hydrochlorede (L-Arginine)</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefminox Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefonicid Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefoperazone Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefotaxime Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefoxitin Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefpiramide Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefpirome Sulfate and Sodium Carbonate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefquinome sulfate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefquinome sulphate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefradine（non-sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefradine（sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefradine（with L-arginine）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ceftazidime</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ceftazidime side chain acid</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ceftiofur</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ceftiofur HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ceftiofur hcl sterile suspension</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ceftiofur sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ceftiofur sodium for injcetion</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ceftriaxone Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefuroxime Axetil</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cefuroxime Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cevimeline HCl (for USA)</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Chloramphenicol</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Chloramphenicol Levogyre</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Chloromethylations</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Chlorophensin /Carbamate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Chloroquine Phosphate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Chlortetracycline</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cimetidine</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cinchocaine HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ciprofloxacin HCL</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cisatracurium Besylate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Citicoline sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Citric Acid mono. / anhydrous</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Clavulanic Acid</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Clindamycin HCL</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Clindamycin Phosphate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Clobetasol Propionate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Clopidogrel Bisulfate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Closantel Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cloxacillin Benzathine（Sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cloxacillin Sodium（Sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Coated Ascorbic Acid</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Codeine Phosph</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Colistin Sulfate 18.000 u/m</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Colistin sulfate E</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Colistin sulfate premix</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Corn Gluten Meal</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Corn Steep Liquor</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Corn Steep Liquor（Reagent Grade）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cross Carmellose Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Crosscarmelose Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Crystalline D-sorbitol</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cyanations</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cyclosporine， Ciclosporin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cyproterone Acetate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Cysteamine HCl</div>
+                    </div>
+                </div>
+
+                <!-- Section D -->
+                <div id="section-d" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">D</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Daptomycin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Decoquinate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Deflazacort Steroid</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Demeclocycline</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dexamethasone Base</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dexamethasone Sod. Phosphate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dexmedetomidine HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dextrinum</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Diazotizations</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Diclazuril</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Diclofenac Sterile/Micronized</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dicloxacillin Sodium（Sterile） Sterile/non-sterile/lyophilized</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dienogest</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Digoxin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dihydrostreptomycin Sulphate Non-Sterile</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dihydrostreptomycin Sulphate Sterile</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dimethyl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dinitolmide</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Diosmin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Dipyridamole</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">DL-Fosfomycin calcium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Doxazosin Mesylate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Doxycycline HCL</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Doxycycline HCL/Base</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">D-phenylglycine</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">D-phenylglycine Dane Salt</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Drotaverine HCl</div>
+                    </div>
+                </div>
+
+                <!-- Section E -->
+                <div id="section-e" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">E</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Eletriptan HBr</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Enrofloxacin Base</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Enrofloxacin HCL</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Entacapone</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Epinastine HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Eprinomectin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Erythromycin Salts</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Erythromycine Base</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Estradiol Benzoate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Estradiol Cypionate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Estradiol Hemihydrate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Estradiol Valerate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Estriol</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ethinyl Estradiol</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Etoposide</div>
+                    </div>
+                </div>
+
+                <!-- Section F -->
+                <div id="section-f" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">F</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Feedstuff Corn Bran</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Feedstuff Corn Embryo</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fenofibrate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fenticonazole</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fexofenadine HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Flavomycin Granulate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Flucloxacillin Sodium（Sterile）</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fluorouracil (5-FU)</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fluvoxamine Maleate (Non-Infringing)</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fomepizole</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fortified Procaine Penicillin（Sterile, Procaine Penicillin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fosfomycin calcium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Friedel Crafts Reactions</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fructose</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Furaltadone</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Furazolidone</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fusidate Sodium</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Fusidic acid</div>
+                    </div>
+                </div>
+
+                <!-- Section G -->
+                <div id="section-g" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">G</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Gefitinib</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Gemcitabine HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Gentamycin Sulfate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Gentamycin Sulphate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Gingko Extract</div>
+                    </div>
+                </div>
+
+                <!-- Section H -->
+                <div id="section-h" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">H</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Halogenations ( PCL , PCL , POCL ) 3 5 3</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hesperidin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">High Temperature and high pressure Reactions</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Homatropine MBr</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydralazine HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydrazine Carboximidamide 2-[Cyano (2,3-Dichlorophenyl)]</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydrocortisone Acetate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydrocortisone Base</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydroxocobalamin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydroxocobalamin Acetate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydroxocobalamin Chloride</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydroxocobalamin Sulphate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hydroxyprogesterone Caproate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hyoscine Butylbromide</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Hyoscine n-butyl bromide</div>
+                    </div>
+                </div>
+
+                <!-- Section I -->
+                <div id="section-i" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">I</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ibuprofen</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Indole Chemistry</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Industrial Dextrinum</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ingenol Mebutate</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Inositol</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Isomaltooligosaccharide Syrup</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Itraconazole</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Ivermectin</div>
+                    </div>
+                </div>
+
+                <!-- Section K -->
+                <div id="section-k" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">K</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Kasugamycin Hydrochloride</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Kitasamycin premix</div>
+                    </div>
+                </div>
+
+                <!-- Section L -->
+                <div id="section-l" class="api-section mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">L</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Lamotrigine</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Lansoprazole</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">L-Cysteine HCL mono. / anhyd.</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Levamisol HCL</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Levocetirizine Di HCl</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Levonorgestrel</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Lincomycin</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Lincomycin HCL injection</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Lincomycin Hydrochloride</div>
+                        <div class="api-item p-3 border border-gray-100 rounded-lg">Luliconazole</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">lutein CWS powder/beadlet</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Lutein Feed Grade</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Lutein Ester Powder</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">lutein oil suspension</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">lutein Powder</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">lutein TAB powder/beadlet</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">L-VC-2-Phosphate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">lycopene</div>
+                </div>
+            </div>
+
+            <!-- Section M -->
+            <div id="section-m" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">M</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Maduramycin granular</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Magnesium Stearate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mebeverine HCl / Pamoate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Meclizine HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mecobalamin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Medroxy Progesterone Acetate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Menthol</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mephenoxalone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mesna</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mesterolone Micro</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Metaxalone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Metformin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Methadone HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Metronidazole</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mezlocillin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mezlocillin Sodium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mezlocillin Sodium and Sulbactam Sodium（4：1）</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Micafungin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Midazolam Base/HCL/Maleate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mifepristone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Minocycillin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Minocycline HCL</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mixture Penicillins products</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mizoribine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mometasone Furoate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mupirocin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mycophenolate Mofetil</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mycophenolate sodium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Mycophenolic acid</div>
+                </div>
+            </div>
+
+            <!-- Section N -->
+            <div id="section-n" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">N</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">N-Acetylcysteine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Naftopidil</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Naltrexone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Natamycin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Neomycin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Neomycin Sulfat Oral</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Neomycin Sulfat Sterile</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Neostigmine Bromide</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Neostigmine Methylsulfate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Nicarbazin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Nicarbazin premix</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Nicergoline</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Nitrations & Nitrasoations</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Noradrenaline Bitartrate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Norethisterone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Norethisterone Acetate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Norethisterone Enanthate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Norgestimate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Norvancomycin Hydrochloride</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Nystatin</div>
+                </div>
+            </div>
+
+            <!-- Section O -->
+            <div id="section-o" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">O</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oflaxacin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Olopatadine HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ospemifene</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxalamine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxaliplatin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxeladine Citrate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxibendazole</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxidations – Metallic & Catalysed</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxiracetam</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxytetracycline</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxytetracycline Base</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxytetracycline Dihdydrate Base Injectable</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxytetracycline HCL</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxytetracycline HCL / base</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Oxytetracylcine HCL Injectable</div>
+                </div>
+            </div>
+
+            <!-- Section P -->
+            <div id="section-p" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">P</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Paracetamol Powder</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Benzathine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Potassium fist crystal</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Procain + 1% Lecithine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Procain Sterile</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Procaine (non-Sterile ,70% Granula)</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Procaine （non-Sterile）</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Procaine（1％Lecithin,sterile）</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Procaine（Polysorbate 80，sterile ）</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Procaine（Sterile）</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicillin G Sodium Sterile</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Penicilline</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Phenoxymethylpenicillin Potassium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Phentermine HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Pilocarpine HCL</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Pilocarpine Nitrate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Piperacillin Sodium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Piperacillin Sodium and Sulbactam Sodium（4：1/2：1）</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Polymyxin B sulfate(Aerosporin)</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Polysaccharides (oral)</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Polysaccharides(for injection)</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Polysorbate80+9.2% Sodium Citrate Buffered （Sterile）</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Pranlukast Hemihydrate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Praziquantel</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Prednisolone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Prednisolone Acetate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Prednisolone Base</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Prednisone Base</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Pregabalin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Pristinamycin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Procaine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Progesterone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Pseudoephedrine HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Pyridostigmine Bromide</div>
+                </div>
+            </div>
+
+            <!-- Section Q -->
+            <div id="section-q" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">Q</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Quetiapine Fumarate</div>
+                </div>
+            </div>
+
+            <!-- Section R -->
+            <div id="section-r" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">R</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Rabeprazole sodium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ractopamine HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Reductions ( NaBH , LiAIH , NaH)</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Refined Corn Oil</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ribavirin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ricobendazole</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Rifampicin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Robenidine HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Robenidinel</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ropinirole HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Rosuvastatin Calcium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ruxolitinib</div>
+                </div>
+            </div>
+
+            <!-- Section S -->
+            <div id="section-s" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">S</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Saccharin Sodium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">S-Carboxymethyl-L-Cysteine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sesame Oil</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sirolimus ，Rapamycin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sodium Ascorbate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sodium CMC</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sodium Starch Glycolate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sorafenib</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sorbitol Solution</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Soy Saponins</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Soybean Isoflavones</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Spectinomycin Hydrochloride Non-Sterile</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Spectinomycin Hydrochloride Sterile</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Spectinomycin Sulphate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Spiramycin Base</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Spironolactone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">st.john's wort extract</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Starch</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Streptomycin Sulphate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Streptomycin Sulphate Crude</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Streptomycin Sulphate Non-Sterile</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Streptomycin Sulphate Sterile</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Strontium Ranelate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sulbactam Acid</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sulbactam Sodium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sulfamethazine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sulfanilamide</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sulfathiazole</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sulpha Drug's</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Sunitinib</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Suxamethonium Chloride</div>
+                </div>
+            </div>
+
+            <!-- Section T -->
+            <div id="section-t" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">T</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tacrolimus ，FK506</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">TAEM</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tamsulosin Hcl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tapentadol HCl (Non Infringing)</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Teicoplanin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Testosterone Cypionate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Testosterone Enanthate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Testosterone Propionate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tetracycline HCL</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tetracycline HCL / feed grade</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tetracycline Hydrochloride</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tetrazepam</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Theobromine</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Theophylline</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Thiamphenicol</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tiamulin Hydrogen Fumarate 98%</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tianeptine Sodium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tibolone</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ticagrelor</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ticarcillin Sodium（Sterile）</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ticarcillin Sodium</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tilmicosin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tilmicosin phosphate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tranexamic Acid</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Trimethoprim</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Trimethoprim Micronized</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Troxerutin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tylosin Phosphate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tylosin Tartrate Granular</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Tylosin Tartrate Powder</div>
+                </div>
+            </div>
+
+            <!-- Section U -->
+            <div id="section-u" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">U</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Ulopristal Acetate</div>
+                </div>
+            </div>
+
+            <!-- Section V -->
+            <div id="section-v" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">V</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Venlafaxine Hydrochloride</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Vinorelbine Tartrate</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Vitamin B12 Feed Ingredients</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Vitamin B12 Food Ingredients</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Vitamin B12 Ingredients Water Soluble</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Vitamin B12, Cyanocobalamin</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Vitamin C Granules</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Vitamin C(Ascorbic Acid)</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Vitamins</div>
+                </div>
+            </div>
+
+            <!-- Section X -->
+            <div id="section-x" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">X</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Xylitol</div>
+                </div>
+            </div>
+
+            <!-- Section Z -->
+            <div id="section-z" class="api-section mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-600 border-b border-emerald-200 pb-2">Z</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">ZB premix</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Zeaxanthin Powder</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Zilpaterol HCl</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Zolendronic Acid</div>
+                    <div class="api-item p-3 border border-gray-100 rounded-lg">Zonisamide</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top bg-emerald-500 text-white p-3 rounded-full shadow-green-glow">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+    </svg>
+</button>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <!-- Company Info -->
+        <div>
+            <div class="flex items-center mb-6">
+                <h3 class="text-2xl font-bold logo-text">TAMA GROUP</h3>
+            </div>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+                Specialized healthcare solutions since 1990. Serving the healthcare sector with excellence and innovation.
+            </p>
+            <div class="flex space-x-4">
+                <a href="#" class="social-icon bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-icon bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+            <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+                <li>
+                    <a href="index.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="who-we-are.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Who We Are?
+                    </a>
+                </li>
+                <li>
+                    <a href="about-us.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        About Us
+                    </a>
+                </li>
+                <li>
+                    <a href="marketing.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Marketing
+                    </a>
+                </li>
+                <li>
+                    <a href="contact-us.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Contact Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Products -->
+        <div>
+            <h3 class="text-xl font-bold mb-6">Our Products</h3>
+            <ul class="space-y-3">
+                <li>
+                    <a href="excipients.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Excipients
+                    </a>
+                </li>
+                <li>
+                    <a href="apis.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        APIs
+                    </a>
+                </li>
+                <li>
+                    <a href="mediclean.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Mediclean
+                    </a>
+                </li>
+            </ul>
+            
+            <h3 class="text-xl font-bold mt-8 mb-6">Newsletter</h3>
+            <form class="flex">
+                <input type="email" placeholder="Your email" class="bg-gray-800 text-white px-4 py-2 rounded-l-lg w-full focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-r-lg transition-colors duration-300">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Contact Info -->
+        <div>
+            <h3 class="text-xl font-bold mb-6">Contact Us</h3>
+            <ul class="space-y-4">
+                <li class="flex items-start">
+                    <i class="fas fa-map-marker-alt mt-1 mr-3 text-emerald-500"></i>
+                    <span class="text-gray-400">123 Healthcare Street, Cairo, Egypt</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-phone-alt mr-3 text-emerald-500"></i>
+                    <span class="text-gray-400">+20 123 456 7890</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-envelope mr-3 text-emerald-500"></i>
+                    <span class="text-gray-400">info@tamagroup-eg.com</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-clock mr-3 text-emerald-500"></i>
+                    <span class="text-gray-400">Mon-Fri: 9:00 AM - 5:00 PM</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+        <p class="text-gray-400">&copy; 2023 Tama Group. All rights reserved.</p>
+    </div>
+</div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+// Mobile Menu Toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+});
+
+// Header Scroll Effect
+const header = document.querySelector('.sticky-header');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+    
+    // Show/hide back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    if (window.scrollY > 300) {
+        backToTopButton.classList.add('visible');
+    } else {
+        backToTopButton.classList.remove('visible');
+    }
+});
+
+// Back to top functionality
+document.getElementById('back-to-top').addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// API Search Functionality - Improved Version
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('api-search');
+    const apiItems = document.querySelectorAll('.api-item');
+    const searchResultsCount = document.getElementById('search-results-count');
+    const resultsCount = document.getElementById('results-count');
+    const apiSections = document.querySelectorAll('.api-section');
+    const letterLinks = document.querySelectorAll('.letter-link');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        let matchCount = 0;
+        
+        // Reset everything if search is empty
+        if (searchTerm === '') {
+            apiItems.forEach(item => {
+                item.style.display = 'block';
+                item.innerHTML = item.textContent; // Remove any highlighting
+            });
+            
+            apiSections.forEach(section => {
+                section.style.display = 'block';
+            });
+            
+            searchResultsCount.classList.add('hidden');
+            return;
+        }
+        
+        // Show search results count
+        searchResultsCount.classList.remove('hidden');
+        
+        apiItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+                item.style.display = 'block';
+                
+                // Highlight the matching text
+                const originalText = item.textContent;
+                const regex = new RegExp(searchTerm, 'gi');
+                const highlightedText = originalText.replace(regex, match => 
+                    `<span class="search-highlight">${match}</span>`
+                );
+                
+                item.innerHTML = highlightedText;
+                matchCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+        
+        // Hide sections with no visible items
+        apiSections.forEach(section => {
+            const sectionItems = section.querySelectorAll('.api-item');
+            let hasVisibleItems = false;
+            
+            sectionItems.forEach(item => {
+                if (item.style.display !== 'none') {
+                    hasVisibleItems = true;
+                }
+            });
+            
+            section.style.display = hasVisibleItems ? 'block' : 'none';
+        });
+        
+        resultsCount.textContent = matchCount;
+    });
+
+    // Active letter in index
+    function setActiveLetterLink() {
+        const scrollPosition = window.scrollY + 120; // Offset for header
+        
+        apiSections.forEach(section => {
+            if (section.style.display !== 'none') {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    const sectionId = section.getAttribute('id');
+                    const letterLink = document.querySelector(`.letter-link[href="#${sectionId}"]`);
+                    
+                    letterLinks.forEach(link => link.classList.remove('active'));
+                    if (letterLink) letterLink.classList.add('active');
+                }
+            }
+        });
+    }
+
+    window.addEventListener('scroll', setActiveLetterLink);
+    window.addEventListener('load', setActiveLetterLink);
+
+    // Smooth scroll for letter links
+    letterLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Set this link as active
+                letterLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            }
+        });
+    });
+});
+
+// Initialize animations
+document.addEventListener('DOMContentLoaded', () => {
+    const animateElements = document.querySelectorAll('.animate-fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+</script>
+</body>
+</html>

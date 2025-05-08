@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing - Tama Group</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    green: {
+                        50: '#f0fdf4',
+                        100: '#dcfce7',
+                        200: '#bbf7d0',
+                        300: '#86efac',
+                        400: '#4ade80',
+                        500: '#22c55e',
+                        600: '#16a34a',
+                        700: '#15803d',
+                        800: '#166534',
+                        900: '#14532d',
+                    },
+                    emerald: {
+                        50: '#ecfdf5',
+                        100: '#d1fae5',
+                        200: '#a7f3d0',
+                        300: '#6ee7b7',
+                        400: '#34d399',
+                        500: '#10b981',
+                        600: '#059669',
+                        700: '#047857',
+                        800: '#065f46',
+                        900: '#064e3b',
+                    },
+                    teal: {
+                        50: '#f0fdfa',
+                        100: '#ccfbf1',
+                        200: '#99f6e4',
+                        300: '#5eead4',
+                        400: '#2dd4bf',
+                        500: '#14b8a6',
+                        600: '#0d9488',
+                        700: '#0f766e',
+                        800: '#115e59',
+                        900: '#134e4a',
+                    },
+                    purple: {
+                        50: '#faf5ff',
+                        100: '#f3e8ff',
+                        200: '#e9d5ff',
+                        300: '#d8b4fe',
+                        400: '#c084fc',
+                        500: '#a855f7',
+                        600: '#9333ea',
+                        700: '#7e22ce',
+                        800: '#6b21a8',
+                        900: '#581c87',
+                    }
+                },
+                fontFamily: {
+                    sans: ['Manrope', 'sans-serif'],
+                    heading: ['Sora', 'sans-serif'],
+                    logo: ['Montserrat', 'sans-serif']
+                },
+                boxShadow: {
+                    'soft-xl': '0 20px 27px 0 rgba(0, 0, 0, 0.05)',
+                    'soft-2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.08)',
+                    'green-glow': '0 0 20px rgba(16, 185, 129, 0.2)',
+                    'green-glow-lg': '0 0 30px rgba(16, 185, 129, 0.3)',
+                },
+                animation: {
+                    'float': 'float 6s ease-in-out infinite',
+                    'float-slow': 'float 8s ease-in-out infinite',
+                    'float-delay': 'float 6s ease-in-out 2s infinite',
+                    'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    'marquee': 'marquee 30s linear infinite',
+                    'marquee-reverse': 'marquee-reverse 30s linear infinite',
+                    'spin-slow': 'spin 8s linear infinite',
+                    'bounce-slow': 'bounce 3s infinite',
+                },
+                keyframes: {
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0)' },
+                        '50%': { transform: 'translateY(-10px)' },
+                    },
+                    marquee: {
+                        '0%': { transform: 'translateX(0)' },
+                        '100%': { transform: 'translateX(-100%)' }
+                    },
+                    'marquee-reverse': {
+                        '0%': { transform: 'translateX(-100%)' },
+                        '100%': { transform: 'translateX(0)' }
+                    }
+                }
+            }
+        }
+    }
+</script>
+<style>
+    body {
+        font-family: 'Manrope', sans-serif;
+        scroll-behavior: smooth;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Sora', sans-serif;
+    }
+    
+    .products-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 300px;
+        background-color: white;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        border-radius: 0 0 16px 16px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 50;
+        display: block;
+    }
+
+    .products-dropdown-trigger:hover .products-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        display: block;
+    }
+
+    .logo-icon {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2), 0 2px 4px -1px rgba(16, 185, 129, 0.1);
+        overflow: hidden;
+    }
+
+    .hero-section {
+        background: linear-gradient(to bottom, rgba(6, 95, 70, 0.85), rgba(6, 78, 59, 0.9)), 
+                    url('https://images.pexels.com/photos/3873143/pexels-photo-3873143.jpeg?auto=compress&cs=tinysrgb&w=600');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 30% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+        z-index: 1;
+    }
+
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 70% 30%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+        z-index: 1;
+    }
+
+    .hero-section > .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .nav-link {
+        position: relative;
+    }
+    
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #10b981;
+        transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 100%;
+    }
+    
+    .btn-primary {
+        background-color: #10b981;
+        color: white;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .btn-primary:hover {
+        background-color: #059669;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transform: translateX(-100%);
+        z-index: -1;
+    }
+    
+    .btn-primary:hover::before {
+        animation: shine 1.5s;
+    }
+    
+    @keyframes shine {
+        100% {
+            transform: translateX(100%);
+        }
+    }
+    
+    .btn-outline {
+        background-color: transparent;
+        border: 2px solid #10b981;
+        color: #10b981;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline:hover {
+        background-color: #10b981;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2);
+    }
+    
+    .btn-white {
+        background-color: white;
+        color: #10b981;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-white:hover {
+        background-color: #f9fafb;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.2);
+    }
+    
+    .sticky-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 50;
+        transition: all 0.3s ease;
+    }
+    
+    .sticky-header.scrolled {
+        background-color: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .header-cta {
+        transition: all 0.3s ease;
+    }
+    
+    .header-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2);
+    }
+    
+    .logo-container {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+    
+    .logo-container:hover {
+        transform: translateY(-2px);
+    }
+    
+    .logo-icon {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #10b981, #065f46);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2), 0 2px 4px -1px rgba(16, 185, 129, 0.1);
+        overflow: hidden;
+    }
+    
+    .logo-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        border-radius: 10px;
+    }
+
+    .social-icon {
+        transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        transform: translateY(-3px);
+        color: white;
+        background-color: #10b981;
+    }
+
+    .animate-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .animate-fade-in.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .animate-fade-in-left {
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .animate-fade-in-left.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .animate-fade-in-right {
+        opacity: 0;
+        transform: translateX(30px);
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .animate-fade-in-right.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .animate-scale-in {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .animate-scale-in.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    .animate-delay-100 {
+        transition-delay: 100ms;
+    }
+    
+    .animate-delay-200 {
+        transition-delay: 200ms;
+    }
+    
+    .animate-delay-300 {
+        transition-delay: 300ms;
+    }
+    
+    .animate-delay-400 {
+        transition-delay: 400ms;
+    }
+    
+    .animate-delay-500 {
+        transition-delay: 500ms;
+    }
+    
+    .animate-delay-600 {
+        transition-delay: 600ms;
+    }
+    
+    .animate-delay-700 {
+        transition-delay: 700ms;
+    }
+    
+    .animate-delay-800 {
+        transition-delay: 800ms;
+    }
+
+    .hover-scale {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .hover-scale:hover {
+        transform: scale(1.05);
+    }
+    
+    .hover-lift {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .hover-lift:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .text-gradient {
+        background: linear-gradient(to right, #10b981, #059669);
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .text-gradient-purple {
+        background: linear-gradient(to right, #9333ea, #7e22ce);
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .bg-gradient {
+        background: linear-gradient(135deg, #10b981 0%, #065f46 100%);
+    }
+    
+    .bg-gradient-light {
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    }
+
+    .blob {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        animation: blob-animation 8s ease-in-out infinite;
+    }
+    
+    @keyframes blob-animation {
+        0% {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+        25% {
+            border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+        }
+        50% {
+            border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+        }
+        75% {
+            border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+        }
+        100% {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+    }
+
+    .clip-path-diagonal {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+    }
+
+    .service-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.05);
+    }
+    
+    .service-card:hover .service-icon {
+        transform: scale(1.1);
+        color: #10b981;
+    }
+    
+    .service-icon {
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .testimonial-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .testimonial-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.05);
+    }
+
+    .counter-box {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .counter-box::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(16, 185, 129, 0.1);
+        border-radius: 8px;
+        z-index: -1;
+    }
+    
+    .counter-box::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(16, 185, 129, 0.1);
+        border-radius: 8px;
+        z-index: -1;
+    }
+    
+    .stats-item {
+        position: relative;
+    }
+    
+    .stats-item::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .stats-item:last-child::after {
+        display: none;
+    }
+
+    .feature-icon {
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+    
+    .feature-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.05);
+    }
+    
+    .feature-card:hover .feature-icon {
+        transform: scale(1.1);
+        color: #10b981;
+    }
+
+    .bg-dots {
+        background-color: #ffffff;
+        background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2310b981' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .bg-pattern {
+        background-color: #f0fdf4;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .bg-stripes {
+        background: repeating-linear-gradient(
+            45deg,
+            rgba(16, 185, 129, 0.03),
+            rgba(16, 185, 129, 0.03) 10px,
+            rgba(16, 185, 129, 0.06) 10px,
+            rgba(16, 185, 129, 0.06) 20px
+        );
+    }
+
+    .logo-text {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+
+    .accordion-header {
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .accordion-content.open {
+        max-height: 500px;
+    }
+
+    .map-responsive {
+        overflow: hidden;
+        padding-bottom: 50%;
+        position: relative;
+        height: 0;
+    }
+
+    .map-responsive iframe {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+    .partner-logo {
+        transition: filter 0.3s ease, transform 0.3s ease;
+        filter: grayscale(100%);
+    }
+    
+    .partner-logo:hover {
+        filter: grayscale(0%);
+        transform: scale(1.05);
+    }
+
+    .marketing-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    
+    .marketing-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.05);
+    }
+
+    .timeline {
+        position: relative;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 100%;
+        background-color: #d1fae5;
+    }
+    
+    .timeline-item {
+        position: relative;
+        margin-bottom: 40px;
+    }
+    
+    .timeline-item::after {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: #10b981;
+        border: 3px solid #d1fae5;
+    }
+    
+    .timeline-content {
+        width: 45%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content {
+        margin-left: auto;
+    }
+    
+    @media (max-width: 768px) {
+        .timeline::before {
+            left: 30px;
+        }
+        
+        .timeline-item::after {
+            left: 30px;
+        }
+        
+        .timeline-content {
+            width: calc(100% - 60px);
+            margin-left: 60px !important;
+        }
+    }
+
+    .case-study-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        transition: all 0.3s ease;
+    }
+    
+    .case-study-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.05);
+    }
+    
+    .case-study-card img {
+        transition: transform 0.5s ease;
+    }
+    
+    .case-study-card:hover img {
+        transform: scale(1.05);
+    }
+    
+    .case-study-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        padding: 20px;
+        color: white;
+        transition: all 0.3s ease;
+    }
+    
+    .case-study-card:hover .case-study-overlay {
+        padding-bottom: 40px;
+    }
+
+    .event-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    
+    .event-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.05);
+    }
+    
+    .event-date {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background-color: #10b981;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: bold;
+        z-index: 10;
+    }
+</style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+<!-- Header -->
+<header class="sticky-header bg-white/95 backdrop-blur-md shadow-md w-full z-50">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+            <a href="index.html" class="logo-container">
+    <span class="text-2xl font-bold text-emerald-600 logo-text tracking-tight">TAMA GROUP</span>
+</a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Home</a>
+            <a href="who-we-are.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Who We Are?</a>
+            
+            <a href="marketing.html" class="nav-link active text-emerald-600 font-medium transition-colors duration-300">Marketing</a>
+            
+            <!-- Products Dropdown Button -->
+            <div class="relative products-dropdown-trigger">
+              <button class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300 flex items-center space-x-1 py-2">
+                  <span>Products</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+              </button>
+              
+              <!-- Products Dropdown Menu -->
+              <div class="products-dropdown">
+                  <div class="bg-white p-1 rounded-b-xl shadow-lg">
+                      <div class="bg-white rounded-xl overflow-hidden">
+                          <div class="grid grid-cols-1 gap-0">
+                              <!-- Excipients -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300 border-b border-gray-100">
+                                  <a href="excipients.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-flask text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">Excipients</h3>
+                                              <p class="text-xs text-gray-600">High-quality pharmaceutical excipients</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                              
+                              <!-- APIs -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300 border-b border-gray-100">
+                                  <a href="apis.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-capsules text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">APIs</h3>
+                                              <p class="text-xs text-gray-600">Active Pharmaceutical Ingredients</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                              
+                              <!-- Mediclean -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300">
+                                  <a href="mediclean.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-pump-medical text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">Mediclean</h3>
+                                              <p class="text-xs text-gray-600">Advanced sanitization solutions</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            
+            <a href="contact-us.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Contact Us</a>
+            
+            <a href="contact-us.html" class="header-cta btn-primary px-5 py-2 rounded-full font-medium text-sm flex items-center shadow-green-glow">
+                Get Started
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+        
+        <!-- Mobile Navigation Button -->
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+    <div class="container mx-auto px-4 py-3 space-y-1">
+        <a href="index.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Home</a>
+        <a href="who-we-are.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Who We Are?</a>
+        
+        <a href="marketing.html" class="block py-2 px-4 text-emerald-600 font-medium border-l-2 border-emerald-500 bg-emerald-50">Marketing</a>
+        
+        <div class="py-2 px-4 text-gray-700 font-medium">Products</div>
+        <a href="excipients.html" class="block py-2 px-8 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">- Excipients</a>
+        <a href="apis.html" class="block py-2 px-8 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">- APIs</a>
+        <a href="mediclean.html" class="block py-2 px-8 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">- Mediclean</a>
+        
+        <a href="contact-us.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Contact Us</a>
+        
+        <div class="pt-2 pb-4 px-4">
+            <a href="contact-us.html" class="btn-primary w-full text-center px-5 py-3 rounded-full font-medium flex items-center justify-center shadow-green-glow">
+                Get Started
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-section min-h-[60vh] flex items-center justify-center text-white clip-path-diagonal relative pt-20">
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+    <div class="absolute top-10 left-10 w-64 h-64 bg-emerald-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+</div>
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span class="bg-emerald-500 w-2 h-2 rounded-full mr-2"></span>
+            Marketing & Promotion
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            Strategic <span class="relative inline-block">
+                <span class="relative z-10">Marketing</span>
+                <span class="absolute bottom-2 left-0 w-full h-3 bg-emerald-500/30 -z-10 transform -rotate-1"></span>
+            </span> Solutions
+        </h1>
+        <p class="text-xl mb-10 opacity-90 max-w-2xl mx-auto leading-relaxed">
+            Discover how Tama Group's innovative marketing strategies help healthcare products reach the right audience and make a meaningful impact.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#marketing-approach" class="btn-primary py-4 px-8 rounded-full font-medium text-lg hover-scale flex items-center justify-center shadow-green-glow">
+                Explore Our Approach
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+            <a href="#case-studies" class="btn-white py-4 px-8 rounded-full font-medium text-lg hover-scale flex items-center justify-center">
+                View Case Studies
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Marketing Approach Section -->
+<section id="marketing-approach" class="py-24 bg-dots">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-scale-in">
+        <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium mb-6">Our Approach</div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Marketing <span class="text-gradient">Philosophy</span>
+        </h2>
+        <p class="text-lg text-gray-700">
+            At Tama Group, we believe in a strategic, data-driven approach to healthcare marketing that prioritizes education, trust, and long-term relationships.
+        </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+        
+<div class="animate-fade-in-left">
+    <div class="relative">
+        <div class="absolute -top-4 -left-4 w-24 h-24 bg-emerald-500/20 rounded-lg -z-10 animate-float"></div>
+        <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-teal-500/20 rounded-lg -z-10 animate-float-delay"></div>
+        <div class="overflow-hidden rounded-3xl shadow-lg h-80">
+            <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGhhcm1hY2V1dGljYWx8ZW58MHx8MHx8fDA%3D" alt="Pharmaceutical Marketing Strategy" class="w-full h-full object-cover object-center">
+        </div>
+    </div>
+</div>
+        
+        <div class="animate-fade-in-right">
+            <h3 class="text-2xl font-bold mb-6 text-gray-900">Our Marketing Philosophy</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                In the specialized healthcare sector, we understand that traditional marketing approaches often fall short. Our marketing philosophy is built on three core principles: education, trust, and value. We believe in empowering healthcare professionals with knowledge, building trust through transparency, and delivering measurable value through our products and services.
+            </p>
+            
+            <div class="space-y-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-soft-xl">
+                    <h4 class="flex items-center text-lg font-bold mb-4 text-gray-900">
+                        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        Education-First Approach
+                    </h4>
+                    <p class="text-gray-700">
+                        We prioritize educating our audience about healthcare challenges and solutions, positioning our products as valuable tools rather than mere commodities.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-soft-xl">
+                    <h4 class="flex items-center text-lg font-bold mb-4 text-gray-900">
+                        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        Relationship Building
+                    </h4>
+                    <p class="text-gray-700">
+                        We focus on cultivating long-term relationships with healthcare providers, distributors, and partners through consistent engagement and exceptional service.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-soft-xl">
+                    <h4 class="flex items-center text-lg font-bold mb-4 text-gray-900">
+                        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        Data-Driven Decisions
+                    </h4>
+                    <p class="text-gray-700">
+                        We leverage market research, customer feedback, and performance analytics to continuously refine our marketing strategies and maximize ROI.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+
+    
+
+<!-- Marketing Channels Section -->
+<section class="py-24 bg-white">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-scale-in">
+        <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium mb-6">Channels</div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Our Marketing <span class="text-gradient">Channels</span>
+        </h2>
+        <p class="text-lg text-gray-700">
+            We leverage a diverse range of marketing channels to reach healthcare professionals and decision-makers effectively.
+        </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Digital Marketing -->
+        <div class="marketing-card animate-fade-in">
+            <a href="excipients.html" class="block">
+                <img src="https://images.pexels.com/photos/159211/headache-pain-pills-medication-159211.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Digital Marketing" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Digital Marketing</h3>
+                    <p class="text-gray-700">
+                        We utilize SEO, PPC, social media, and email marketing to drive online visibility and engagement.
+                    </p>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Traditional Marketing -->
+        <div class="marketing-card animate-fade-in animate-delay-200">
+            <a href="apis.html" class="block">
+                <img src="https://images.pexels.com/photos/208518/pexels-photo-208518.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Traditional Marketing" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Traditional Marketing</h3>
+                    <p class="text-gray-700">
+                        We leverage print ads, industry publications, and direct mail to reach a wider audience.
+                    </p>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Event Marketing -->
+        <div class="marketing-card animate-fade-in animate-delay-400">
+            <a href="mediclean.html" class="block">
+                <img src="https://images.pexels.com/photos/3652103/pexels-photo-3652103.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Event Marketing" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Event Marketing</h3>
+                    <p class="text-gray-700">
+                        We participate in industry conferences, trade shows, and webinars to connect with potential customers.
+                    </p>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Content Marketing -->
+        <div class="marketing-card animate-fade-in animate-delay-600">
+            <a href="contact-us.html" class="block">
+                <img src="https://media.istockphoto.com/id/1832921718/photo/heap-of-medications-on-blue-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=Pf0cO6x-R_rBZJHyprPzfxCUakjrtHVOZNavnuLZRRI=" alt="Content Marketing" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Content Marketing</h3>
+                    <p class="text-gray-700">
+                        We create valuable content such as blog posts, white papers, and case studies to educate and engage our audience.
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Case Studies Section -->
+<section id="case-studies" class="py-24 bg-dots">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-scale-in">
+        <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium mb-6">Success Stories</div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Marketing <span class="text-gradient">Case Studies</span>
+        </h2>
+        <p class="text-lg text-gray-700">
+            Explore our case studies to see how we've helped healthcare companies achieve their marketing goals.
+        </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Case Study 1 -->
+        <div class="case-study-card animate-fade-in">
+            <a href="excipients.html">
+                <img src="https://images.pexels.com/photos/4046997/pexels-photo-4046997.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pharmaceutical Product Launch" class="w-full h-full object-cover">
+                <div class="case-study-overlay">
+                    <h3 class="text-xl font-bold mb-2">Pharmaceutical Product Launch</h3>
+                    <p class="text-sm">
+                        Successfully launched a new pharmaceutical product with a comprehensive marketing campaign.
+                    </p>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Case Study 2 -->
+        <div class="case-study-card animate-fade-in animate-delay-200">
+            <a href="apis.html">
+                <img src="https://images.pexels.com/photos/208518/pexels-photo-208518.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Healthcare Conference" class="w-full h-full object-cover">
+                <div class="case-study-overlay">
+                    <h3 class="text-xl font-bold mb-2">Healthcare Conference Promotion</h3>
+                    <p class="text-sm">
+                        Increased attendance at a healthcare conference through targeted digital marketing efforts.
+                    </p>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Case Study 3 -->
+        <div class="case-study-card animate-fade-in animate-delay-400">
+            <a href="mediclean.html">
+                <img src="https://images.pexels.com/photos/3873143/pexels-photo-3873143.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Digital Campaign" class="w-full h-full object-cover">
+                <div class="case-study-overlay">
+                    <h3 class="text-xl font-bold mb-2">Digital Campaign for Medical Device</h3>
+                    <p class="text-sm">
+                        Improved brand awareness and generated leads for a medical device company through a digital campaign.
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Contact Us Section -->
+<section class="py-16 bg-dots">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-10 animate-scale-in">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            <span class="text-gradient">Contact Us</span>
+        </h2>
+        <p class="text-lg text-gray-700">
+            Reach out to discuss how we can help with your pharmaceutical marketing needs.
+        </p>
+    </div>
+    
+    <div class="flex justify-center animate-fade-in">
+        <a href="contact-us.html" class="btn-primary py-4 px-8 rounded-full font-medium text-lg hover-scale flex items-center justify-center shadow-green-glow">
+            Get in Touch
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+        </a>
+    </div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-50 py-12 border-t border-gray-100">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Company Info -->
+        <div>
+            <h4 class="text-lg font-bold mb-4 text-gray-900">Tama Group</h4>
+            <p class="text-gray-700 mb-4">
+                Your trusted partner for healthcare marketing solutions.
+            </p>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors duration-300">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors duration-300">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors duration-300">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors duration-300">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+            <h4 class="text-lg font-bold mb-4 text-gray-900">Quick Links</h4>
+            <ul class="space-y-2">
+                <li>
+                    <a href="index.html" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300">Home</a>
+                </li>
+                <li>
+                    <a href="who-we-are.html" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300">Who We Are?</a>
+                </li>
+                <li>
+                    <a href="marketing.html" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300">Marketing</a>
+                </li>
+                <li>
+                    <a href="products.html" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300">Products</a>
+                </li>
+                <li>
+                    <a href="contact-us.html" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Products -->
+        <div>
+            <h4 class="text-lg font-bold mb-4 text-gray-900">Products</h4>
+            <ul class="space-y-2">
+                <li>
+                    <a href="excipients.html" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300">Excipients</a>
+                </li>
+                <li>
+                    <a href="apis.html" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300">APIs</a>
+                </li>
+                <li>
+                    <a href="mediclean.html" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300">Mediclean</a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Contact Info -->
+        <div>
+            <h4 class="text-lg font-bold mb-4 text-gray-900">Contact Info</h4>
+            <p class="text-gray-700 mb-2">
+                123 Main Street, Cityville, State
+            </p>
+            <p class="text-gray-700 mb-2">
+                Email: info@tamagroup.com
+            </p>
+            <p class="text-gray-700">
+                Phone: (123) 456-7890
+            </p>
+        </div>
+    </div>
+    
+    <div class="mt-8 text-center text-gray-600">
+        &copy; 2024 Tama Group. All rights reserved.
+    </div>
+</div>
+</footer>
+
+<script>
+    // Sticky Header
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.sticky-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // Mobile Menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Animation observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Stop observing after active
+            }
+        });
+    });
+
+    const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-fade-in-left, .animate-fade-in-right, .animate-scale-in');
+    animatedElements.forEach((element) => {
+        observer.observe(element);
+    });
+</script>
+</body>
+</html>

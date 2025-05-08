@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - Tama Group</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    green: {
+                        50: '#f0fdf4',
+                        100: '#dcfce7',
+                        200: '#bbf7d0',
+                        300: '#86efac',
+                        400: '#4ade80',
+                        500: '#22c55e',
+                        600: '#16a34a',
+                        700: '#15803d',
+                        800: '#166534',
+                        900: '#14532d',
+                    },
+                    emerald: {
+                        50: '#ecfdf5',
+                        100: '#d1fae5',
+                        200: '#a7f3d0',
+                        300: '#6ee7b7',
+                        400: '#34d399',
+                        500: '#10b981',
+                        600: '#059669',
+                        700: '#047857',
+                        800: '#065f46',
+                        900: '#064e3b',
+                    },
+                    teal: {
+                        50: '#f0fdfa',
+                        100: '#ccfbf1',
+                        200: '#99f6e4',
+                        300: '#5eead4',
+                        400: '#2dd4bf',
+                        500: '#14b8a6',
+                        600: '#0d9488',
+                        700: '#0f766e',
+                        800: '#115e59',
+                        900: '#134e4a',
+                    },
+                    purple: {
+                        50: '#faf5ff',
+                        100: '#f3e8ff',
+                        200: '#e9d5ff',
+                        300: '#d8b4fe',
+                        400: '#c084fc',
+                        500: '#a855f7',
+                        600: '#9333ea',
+                        700: '#7e22ce',
+                        800: '#6b21a8',
+                        900: '#581c87',
+                    }
+                },
+                fontFamily: {
+                    sans: ['Manrope', 'sans-serif'],
+                    heading: ['Sora', 'sans-serif'],
+                    logo: ['Montserrat', 'sans-serif']
+                },
+                boxShadow: {
+                    'soft-xl': '0 20px 27px 0 rgba(0, 0, 0, 0.05)',
+                    'soft-2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.08)',
+                    'green-glow': '0 0 20px rgba(16, 185, 129, 0.2)',
+                    'green-glow-lg': '0 0 30px rgba(16, 185, 129, 0.3)',
+                },
+                animation: {
+                    'float': 'float 6s ease-in-out infinite',
+                    'float-slow': 'float 8s ease-in-out infinite',
+                    'float-delay': 'float 6s ease-in-out 2s infinite',
+                    'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                },
+                keyframes: {
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0)' },
+                        '50%': { transform: 'translateY(-10px)' },
+                    }
+                }
+            }
+        }
+    }
+</script>
+<style>
+    body {
+        font-family: 'Manrope', sans-serif;
+        scroll-behavior: smooth;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Sora', sans-serif;
+    }
+    
+    .products-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 300px;
+        background-color: white;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        border-radius: 0 0 16px 16px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 50;
+        display: block;
+    }
+
+    .products-dropdown-trigger:hover .products-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        display: block;
+    }
+
+    .logo-icon {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2), 0 2px 4px -1px rgba(16, 185, 129, 0.1);
+        overflow: hidden;
+    }
+
+    .hero-section {
+        background: linear-gradient(to bottom, rgba(6, 95, 70, 0.85), rgba(6, 78, 59, 0.9)), 
+                    url('/placeholder.svg?height=1080&width=1920');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 30% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+        z-index: 1;
+    }
+
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 70% 30%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+        z-index: 1;
+    }
+
+    .hero-section > .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .nav-link {
+        position: relative;
+    }
+    
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #10b981;
+        transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 100%;
+    }
+    
+    .btn-primary {
+        background-color: #10b981;
+        color: white;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .btn-primary:hover {
+        background-color: #059669;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transform: translateX(-100%);
+        z-index: -1;
+    }
+    
+    .btn-primary:hover::before {
+        animation: shine 1.5s;
+    }
+    
+    @keyframes shine {
+        100% {
+            transform: translateX(100%);
+        }
+    }
+    
+    .sticky-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 50;
+        transition: all 0.3s ease;
+    }
+    
+    .sticky-header.scrolled {
+        background-color: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .header-cta {
+        transition: all 0.3s ease;
+    }
+    
+    .header-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2);
+    }
+    
+    .logo-container {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+    
+    .logo-container:hover {
+        transform: translateY(-2px);
+    }
+    
+    .logo-icon {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #10b981, #065f46);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2), 0 2px 4px -1px rgba(16, 185, 129, 0.1);
+        overflow: hidden;
+    }
+    
+    .logo-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        border-radius: 10px;
+    }
+
+    .logo-text {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+
+    .text-gradient {
+        background: linear-gradient(to right, #10b981, #059669);
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .bg-gradient {
+        background: linear-gradient(135deg, #10b981 0%, #065f46 100%);
+    }
+
+    .clip-path-diagonal {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+    }
+
+    .animate-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .animate-fade-in.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .contact-card {
+        transition: all 0.3s ease;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-icon {
+        transition: all 0.3s ease;
+    }
+    
+    .contact-card:hover .contact-icon {
+        transform: scale(1.1);
+        color: #10b981;
+    }
+
+    .social-icon {
+        transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        transform: translateY(-3px);
+        color: white;
+        background-color: #10b981;
+    }
+
+    .map-responsive {
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        position: relative;
+        height: 0;
+    }
+
+    .map-responsive iframe {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+    .department-card {
+        transition: all 0.3s ease;
+    }
+    
+    .department-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+</style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+<!-- Header -->
+<header class="sticky-header bg-white/95 backdrop-blur-md shadow-md w-full z-50">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+            <a href="index.html" class="logo-container">
+    <span class="text-2xl font-bold text-emerald-600 logo-text tracking-tight">TAMA GROUP</span>
+</a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Home</a>
+            <a href="who-we-are.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Who We Are?</a>
+            <a href="about-us.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">About Us</a>
+            <a href="marketing.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Marketing</a>
+            
+            <!-- Products Dropdown Button -->
+            <div class="relative products-dropdown-trigger">
+              <button class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300 flex items-center space-x-1 py-2">
+                  <span>Products</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+              </button>
+              
+              <!-- Products Dropdown Menu -->
+              <div class="products-dropdown">
+                  <div class="bg-white p-1 rounded-b-xl shadow-lg">
+                      <div class="bg-white rounded-xl overflow-hidden">
+                          <div class="grid grid-cols-1 gap-0">
+                              <!-- Excipients -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300 border-b border-gray-100">
+                                  <a href="excipients.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-flask text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">Excipients</h3>
+                                              <p class="text-xs text-gray-600">High-quality pharmaceutical excipients</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                              
+                              <!-- APIs -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300 border-b border-gray-100">
+                                  <a href="apis.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-capsules text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">APIs</h3>
+                                              <p class="text-xs text-gray-600">Active Pharmaceutical Ingredients</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                              
+                              <!-- Mediclean -->
+                              <div class="p-4 hover:bg-emerald-50 transition-colors duration-300">
+                                  <a href="mediclean.html" class="block">
+                                      <div class="flex items-center">
+                                          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+                                              <i class="fas fa-pump-medical text-sm"></i>
+                                          </div>
+                                          <div>
+                                              <h3 class="text-base font-bold text-gray-900">Mediclean</h3>
+                                              <p class="text-xs text-gray-600">Advanced sanitization solutions</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            
+            <a href="contact-us.html" class="nav-link active text-emerald-600 font-medium transition-colors duration-300">Contact Us</a>
+            
+            <a href="https://wa.me/201234567890" class="header-cta btn-primary px-5 py-2 rounded-full font-medium text-sm flex items-center shadow-green-glow">
+                <i class="fab fa-whatsapp mr-2"></i>
+                WhatsApp Us
+            </a>
+        </div>
+        
+        <!-- Mobile Navigation Button -->
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+    <div class="container mx-auto px-4 py-3 space-y-1">
+        <a href="index.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Home</a>
+        <a href="who-we-are.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Who We Are?</a>
+        <a href="about-us.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">About Us</a>
+        <a href="marketing.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Marketing</a>
+        
+        <div class="py-2 px-4 text-gray-700 font-medium">Products</div>
+        <a href="excipients.html" class="block py-2 px-8 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">- Excipients</a>
+        <a href="apis.html" class="block py-2 px-8 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">- APIs</a>
+        <a href="mediclean.html" class="block py-2 px-8 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">- Mediclean</a>
+        
+        <a href="contact-us.html" class="block py-2 px-4 text-emerald-600 font-medium border-l-2 border-emerald-500 bg-emerald-50">Contact Us</a>
+        
+        <div class="pt-2 pb-4 px-4">
+            <a href="https://wa.me/201234567890" class="btn-primary w-full text-center px-5 py-3 rounded-full font-medium flex items-center justify-center shadow-green-glow">
+                <i class="fab fa-whatsapp mr-2"></i>
+                WhatsApp Us
+            </a>
+        </div>
+    </div>
+</div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-section min-h-[40vh] flex items-center justify-center text-white clip-path-diagonal relative pt-20">
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+    <div class="absolute top-10 left-10 w-64 h-64 bg-emerald-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+</div>
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span class="bg-emerald-500 w-2 h-2 rounded-full mr-2"></span>
+            Get In Touch
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            Contact <span class="relative inline-block">
+                <span class="relative z-10">Us</span>
+                <span class="absolute bottom-2 left-0 w-full h-3 bg-emerald-500/30 -z-10 transform -rotate-1"></span>
+            </span>
+        </h1>
+        <p class="text-xl mb-10 opacity-90 max-w-2xl mx-auto leading-relaxed">
+            We're here to help with any questions about our products and services. Reach out to us through any of our contact channels.
+        </p>
+    </div>
+</div>
+</section>
+
+<!-- Main Contact Section -->
+<section class="py-20 bg-white">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-fade-in">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-gray-900">Get In Touch</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    We're always ready to assist you with any inquiries about our products, services, or partnership opportunities.
+                </p>
+                
+                <!-- WhatsApp Contact - Primary Contact Method -->
+                <div class="bg-emerald-50 rounded-xl p-8 shadow-soft-xl mb-8">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-emerald-100 p-4 rounded-full mr-4">
+                            <i class="fab fa-whatsapp text-emerald-500 text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">WhatsApp</h3>
+                            <p class="text-gray-600">Our preferred contact method for quick responses</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        For immediate assistance and product inquiries, reach out to us on WhatsApp. Our team is available during business hours to respond to your messages.
+                    </p>
+                    <a href="https://wa.me/201234567890" class="btn-primary px-8 py-4 rounded-full font-medium text-base inline-flex items-center shadow-green-glow">
+                        <i class="fab fa-whatsapp mr-2 text-xl"></i>
+                        Message Us on WhatsApp
+                    </a>
+                </div>
+                
+                <!-- Other Contact Methods -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Phone -->
+                    <div class="contact-card bg-white rounded-xl shadow-soft-xl p-6">
+                        <div class="contact-icon text-emerald-500 text-3xl mb-4">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">Call Us</h3>
+                        <p class="text-gray-600 mb-4">
+                            Speak directly with our team
+                        </p>
+                        <a href="tel:+201234567890" class="text-emerald-600 font-bold text-lg hover:text-emerald-700 transition-colors duration-300">
+                            +20 123 456 7890
+                        </a>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="contact-card bg-white rounded-xl shadow-soft-xl p-6">
+                        <div class="contact-icon text-emerald-500 text-3xl mb-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">Email Us</h3>
+                        <p class="text-gray-600 mb-4">
+                            Send us a detailed message
+                        </p>
+                        <a href="mailto:info@tamagroup-eg.com" class="text-emerald-600 font-bold text-lg hover:text-emerald-700 transition-colors duration-300">
+                            info@tamagroup-eg.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="animate-fade-in" style="transition-delay: 0.2s;">
+                <!-- Location Map -->
+                <div class="bg-white rounded-xl shadow-soft-xl overflow-hidden">
+                    <div class="map-responsive">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.6661200297734!2d31.2443383!3d30.0444196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzM5LjkiTiAzMcKwMTQnMzkuNiJF!5e0!3m2!1sen!2seg!4v1623456789012!5m2!1sen!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">Visit Our Office</h3>
+                        <div class="flex items-start mb-4">
+                            <div class="bg-emerald-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Address</h4>
+                                <p class="text-gray-600">123 Healthcare Street, Cairo, Egypt</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-emerald-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-clock text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Business Hours</h4>
+                                <p class="text-gray-600">Monday - Friday: 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Department Contacts Section -->
+<section class="py-20 bg-gray-50">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-900">Department Contacts</h2>
+        <p class="text-lg text-gray-600">
+            Reach out to our specialized departments directly for specific inquiries.
+        </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Sales Department -->
+        <div class="department-card bg-white rounded-xl shadow-soft-xl p-6 animate-fade-in">
+            <div class="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                <i class="fas fa-chart-line text-2xl text-emerald-500"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Sales Department</h3>
+            <p class="text-gray-700 mb-4">
+                For product inquiries, pricing, and ordering information.
+            </p>
+            <div class="space-y-2">
+                <div class="flex items-center">
+                    <i class="fab fa-whatsapp text-emerald-500 mr-2"></i>
+                    <a href="https://wa.me/201234567890" class="text-emerald-600 hover:text-emerald-700 transition-colors duration-300">
+                        +20 123 456 7890
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-emerald-500 mr-2"></i>
+                    <a href="mailto:sales@tamagroup-eg.com" class="text-emerald-600 hover:text-emerald-700 transition-colors duration-300">
+                        sales@tamagroup-eg.com
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Technical Support -->
+        <div class="department-card bg-white rounded-xl shadow-soft-xl p-6 animate-fade-in" style="transition-delay: 0.1s;">
+            <div class="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                <i class="fas fa-cogs text-2xl text-emerald-500"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Technical Support</h3>
+            <p class="text-gray-700 mb-4">
+                For product specifications, formulation assistance, and technical questions.
+            </p>
+            <div class="space-y-2">
+                <div class="flex items-center">
+                    <i class="fab fa-whatsapp text-emerald-500 mr-2"></i>
+                    <a href="https://wa.me/201234567891" class="text-emerald-600 hover:text-emerald-700 transition-colors duration-300">
+                        +20 123 456 7891
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-emerald-500 mr-2"></i>
+                    <a href="mailto:technical@tamagroup-eg.com" class="text-emerald-600 hover:text-emerald-700 transition-colors duration-300">
+                        technical@tamagroup-eg.com
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Customer Service -->
+        <div class="department-card bg-white rounded-xl shadow-soft-xl p-6 animate-fade-in" style="transition-delay: 0.2s;">
+            <div class="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                <i class="fas fa-headset text-2xl text-emerald-500"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Customer Service</h3>
+            <p class="text-gray-700 mb-4">
+                For order status, shipping inquiries, and general assistance.
+            </p>
+            <div class="space-y-2">
+                <div class="flex items-center">
+                    <i class="fab fa-whatsapp text-emerald-500 mr-2"></i>
+                    <a href="https://wa.me/201234567892" class="text-emerald-600 hover:text-emerald-700 transition-colors duration-300">
+                        +20 123 456 7892
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-emerald-500 mr-2"></i>
+                    <a href="mailto:support@tamagroup-eg.com" class="text-emerald-600 hover:text-emerald-700 transition-colors duration-300">
+                        support@tamagroup-eg.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Product Links Section -->
+<section class="py-20 bg-white">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto">
+        <div class="bg-gradient rounded-3xl p-12 text-white text-center animate-fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                Explore Our <span class="relative inline-block">
+                    <span class="relative z-10">Products</span>
+                    <span class="absolute bottom-2 left-0 w-full h-3 bg-white/30 -z-10 transform -rotate-1"></span>
+                </span>
+            </h2>
+            <p class="text-xl opacity-90 mb-10 max-w-2xl mx-auto">
+                Discover our comprehensive range of healthcare solutions designed to meet your specific needs.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Excipients -->
+                <a href="excipients.html" class="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all duration-300">
+                    <div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-flask text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Excipients</h3>
+                    <p class="opacity-80 mb-4">High-quality pharmaceutical excipients for optimal formulations</p>
+                    <span class="inline-flex items-center text-sm font-medium">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </span>
+                </a>
+                
+                <!-- APIs -->
+                <a href="apis.html" class="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all duration-300">
+                    <div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-capsules text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">APIs</h3>
+                    <p class="opacity-80 mb-4">Active Pharmaceutical Ingredients for diverse therapeutic applications</p>
+                    <span class="inline-flex items-center text-sm font-medium">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </span>
+                </a>
+                
+                <!-- Mediclean -->
+                <a href="mediclean.html" class="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all duration-300">
+                    <div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-pump-medical text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Mediclean</h3>
+                    <p class="opacity-80 mb-4">Advanced sanitization solutions for healthcare environments</p>
+                    <span class="inline-flex items-center text-sm font-medium">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <!-- Company Info -->
+        <div>
+            <div class="flex items-center mb-6">
+                <div class="logo-icon">
+                    <span class="text-white text-lg font-bold">T</span>
+                </div>
+                <h3 class="text-2xl font-bold logo-text">TAMA GROUP</h3>
+            </div>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+                Specialized healthcare solutions since 1990. Serving the healthcare sector with excellence and innovation.
+            </p>
+            <div class="flex space-x-4">
+                <a href="#" class="social-icon bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-icon bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+            <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+                <li>
+                    <a href="index.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="who-we-are.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Who We Are?
+                    </a>
+                </li>
+                <li>
+                    <a href="about-us.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        About Us
+                    </a>
+                </li>
+                <li>
+                    <a href="marketing.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Marketing
+                    </a>
+                </li>
+                <li>
+                    <a href="contact-us.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Contact Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Products -->
+        <div>
+            <h3 class="text-xl font-bold mb-6">Our Products</h3>
+            <ul class="space-y-3">
+                <li>
+                    <a href="excipients.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Excipients
+                    </a>
+                </li>
+                <li>
+                    <a href="apis.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        APIs
+                    </a>
+                </li>
+                <li>
+                    <a href="mediclean.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Mediclean
+                    </a>
+                </li>
+            </ul>
+            
+            <h3 class="text-xl font-bold mt-8 mb-6">Newsletter</h3>
+            <form class="flex">
+                <input type="email" placeholder="Your email" class="bg-gray-800 text-white px-4 py-2 rounded-l-lg w-full focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-r-lg transition-colors duration-300">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Contact Info -->
+        <div>
+            <h3 class="text-xl font-bold mb-6">Contact Us</h3>
+            <ul class="space-y-4">
+                <li class="flex items-start">
+                    <i class="fas fa-map-marker-alt mt-1 mr-3 text-emerald-500"></i>
+                    <span class="text-gray-400">123 Healthcare Street, Cairo, Egypt</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-phone-alt mr-3 text-emerald-500"></i>
+                    <span class="text-gray-400">+20 123 456 7890</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-envelope mr-3 text-emerald-500"></i>
+                    <span class="text-gray-400">info@tamagroup-eg.com</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-clock mr-3 text-emerald-500"></i>
+                    <span class="text-gray-400">Mon-Fri: 9:00 AM - 5:00 PM</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+        <p class="text-gray-400">&copy; 2023 Tama Group. All rights reserved.</p>
+    </div>
+</div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+// Mobile Menu Toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+});
+
+// Header Scroll Effect
+const header = document.querySelector('.sticky-header');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Initialize animations
+document.addEventListener('DOMContentLoaded', () => {
+    const animateElements = document.querySelectorAll('.animate-fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+</script>
+</body>
+</html>

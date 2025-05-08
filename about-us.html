@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Tama Group</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        green: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
+        },
+        emerald: {
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+          700: '#047857',
+          800: '#065f46',
+          900: '#064e3b',
+        },
+        teal: {
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+        }
+      },
+      fontFamily: {
+        sans: ['Manrope', 'sans-serif'],
+        heading: ['Sora', 'sans-serif'],
+        logo: ['Montserrat', 'sans-serif']
+      },
+      boxShadow: {
+        'soft-xl': '0 20px 27px 0 rgba(0, 0, 0, 0.05)',
+        'soft-2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.08)',
+        'green-glow': '0 0 20px rgba(16, 185, 129, 0.2)',
+        'green-glow-lg': '0 0 30px rgba(16, 185, 129, 0.3)',
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'float-slow': 'float 8s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        }
+      }
+    }
+  }
+}
+</script>
+<style>
+body {
+  font-family: 'Manrope', sans-serif;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sora', sans-serif;
+}
+
+.logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #10b981;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #10b981;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+}
+
+.btn-white {
+  background-color: white;
+  color: #10b981;
+  transition: all 0.3s ease;
+}
+
+.btn-white:hover {
+  background-color: #f9fafb;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.2);
+}
+
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+.sticky-header.scrolled {
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 280px;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  padding: 0.5rem;
+}
+
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: -1;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  margin-top: 0.5rem;
+}
+
+.dropdown-item {
+  transition: all 0.2s ease;
+  border-radius: 0.5rem;
+}
+
+.dropdown-item:hover {
+  background-color: #ecfdf5;
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+    margin-top: 0;
+    min-width: 100%;
+  }
+  
+  .dropdown-menu::before {
+    display: none;
+  }
+  
+  .dropdown.open .dropdown-menu {
+    display: block;
+  }
+}
+
+.hero-section {
+  background: linear-gradient(to bottom, rgba(6, 95, 70, 0.85), rgba(6, 78, 59, 0.9)), 
+              url('/placeholder.svg?height=1080&width=1920');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #10b981, #059669);
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #10b981 0%, #065f46 100%);
+}
+
+.hover-lift {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.animate-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-fade-in.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 40;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    display: none;
+  }
+  
+  .dropdown.open .dropdown-menu {
+    display: block;
+  }
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<!-- Header -->
+<header class="sticky-header bg-white shadow-md w-full z-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <div class="flex items-center">
+        <a href="index.html" class="flex items-center">
+          <span class="text-2xl font-bold text-emerald-600 logo-text tracking-tight">TAMA GROUP</span>
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="index.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Home</a>
+        <a href="who-we-are.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Who We Are?</a>
+        <a href="about-us.html" class="nav-link active text-emerald-600 font-medium transition-colors duration-300">About Us</a>
+        <a href="marketing.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Marketing</a>
+        
+        <!-- Products Dropdown -->
+        <div class="dropdown relative group">
+  <button class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300 flex items-center space-x-1">
+    <span>Products</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  
+  <div class="dropdown-menu">
+    <a href="excipients.html" class="dropdown-item block p-3 hover:bg-emerald-50 rounded-md transition-colors duration-300">
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+          <i class="fas fa-flask"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-gray-900">Excipients</h3>
+          <p class="text-xs text-gray-600">High-quality pharmaceutical excipients</p>
+        </div>
+      </div>
+    </a>
+    
+    <a href="apis.html" class="dropdown-item block p-3 hover:bg-emerald-50 rounded-md transition-colors duration-300">
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+          <i class="fas fa-capsules"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-gray-900">APIs</h3>
+          <p class="text-xs text-gray-600">Active Pharmaceutical Ingredients</p>
+        </div>
+      </div>
+    </a>
+    
+    <a href="mediclean.html" class="dropdown-item block p-3 hover:bg-emerald-50 rounded-md transition-colors duration-300">
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
+          <i class="fas fa-pump-medical"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-gray-900">Mediclean</h3>
+          <p class="text-xs text-gray-600">Advanced sanitization solutions</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+        
+        <a href="contact-us.html" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300">Contact Us</a>
+        
+        <a href="contact-us.html" class="btn-primary px-5 py-2 rounded-full font-medium text-sm flex items-center shadow-green-glow">
+          Get Started
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+      
+      <!-- Mobile Navigation Button -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+    <div class="container mx-auto px-4 py-3 space-y-1">
+      <a href="index.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Home</a>
+      <a href="who-we-are.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Who We Are?</a>
+      <a href="about-us.html" class="block py-2 px-4 text-emerald-600 font-medium border-l-2 border-emerald-500 bg-emerald-50">About Us</a>
+      <a href="marketing.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Marketing</a>
+      
+      <!-- Mobile Products Dropdown -->
+      <div class="py-2 px-4">
+        <button id="mobile-products-button" class="flex justify-between items-center w-full text-gray-700 font-medium">
+          <span>Products</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="mobile-products-menu" class="hidden mt-2 ml-4 space-y-1">
+          <a href="excipients.html" class="block py-2 px-4 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Excipients</a>
+          <a href="apis.html" class="block py-2 px-4 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">APIs</a>
+          <a href="mediclean.html" class="block py-2 px-4 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Mediclean</a>
+        </div>
+      </div>
+      
+      <a href="contact-us.html" class="block py-2 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium border-l-2 border-transparent hover:border-emerald-500 transition-colors duration-300">Contact Us</a>
+      
+      <div class="pt-2 pb-4 px-4">
+        <a href="contact-us.html" class="btn-primary w-full text-center px-5 py-3 rounded-full font-medium flex items-center justify-center shadow-green-glow">
+          Get Started
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-section py-20 md:py-32 text-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="inline-block px-4 py-1 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
+        <span class="bg-emerald-500 w-2 h-2 rounded-full inline-block mr-2"></span>
+        About Tama Group
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        Healthcare <span class="relative inline-block">
+          <span class="relative z-10">Innovation</span>
+          <span class="absolute bottom-2 left-0 w-full h-3 bg-emerald-500/30 -z-10 transform -rotate-1"></span>
+        </span> Partner
+      </h1>
+      <p class="text-xl mb-10 opacity-90 max-w-2xl mx-auto leading-relaxed">
+        Discover how Tama Group has been advancing healthcare through innovation, quality products, and trusted partnerships since 1990.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#overview" class="btn-white py-3 px-6 rounded-full font-medium hover:shadow-lg">
+          Learn More
+        </a>
+        <a href="contact-us.html" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 px-6 rounded-full font-medium hover:shadow-lg transition-all duration-300">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Company Overview Section -->
+<section id="overview" class="py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="animate-fade-in">
+        <div class="relative">
+          <div class="absolute -top-4 -left-4 w-24 h-24 bg-emerald-500/20 rounded-lg -z-10 animate-float"></div>
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-teal-500/20 rounded-lg -z-10 animate-float-slow"></div>
+          <div class="overflow-hidden rounded-3xl shadow-xl">
+            <img src="/placeholder.svg?height=600&width=800" alt="Tama Group Headquarters" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+      
+      <div class="animate-fade-in">
+        <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium mb-6">Company Overview</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+          Tama Group at a Glance
+        </h2>
+        
+        <p class="text-gray-700 mb-6 leading-relaxed">
+          Founded in 1990, Tama Group has established itself as a leading provider of specialized healthcare solutions in Egypt and beyond. We focus on three core business areas: pharmaceutical excipients, active pharmaceutical ingredients (APIs), and sanitization solutions through our Mediclean line.
+        </p>
+        
+        <p class="text-gray-700 mb-8 leading-relaxed">
+          Our company combines global expertise with local market knowledge to deliver high-quality products that meet the evolving needs of healthcare providers and manufacturers. With a strong commitment to quality, innovation, and customer satisfaction, we have built enduring relationships with partners across the healthcare sector.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl p-6 shadow-md hover-lift">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4 text-emerald-600">
+                <i class="fas fa-check-circle text-xl"></i>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">ISO Certified</h3>
+            </div>
+            <p class="text-gray-700">Our operations meet international quality management standards.</p>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-md hover-lift">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4 text-emerald-600">
+                <i class="fas fa-globe-americas text-xl"></i>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">Local Expertise</h3>
+            </div>
+            <p class="text-gray-700">Serving clients throughout Egypt with specialized healthcare solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Organization Structure Section -->
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+      <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium mb-6">Our Leadership</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+        Organization <span class="text-gradient">Structure</span>
+      </h2>
+      <p class="text-lg text-gray-700">
+        Meet the experienced team behind Tama Group's success and innovation.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 animate-fade-in">
+      <!-- Leader 1 - Yousria -->
+      <div class="bg-white rounded-xl shadow-md p-6 hover-lift text-center">
+        <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6">
+          <a href="https://media.discordapp.net/attachments/1270881377201557504/1364414484881608786/image.png?ex=68099582&is=68084402&hm=0360a7addccaafe78b82d882961431335e531c201ad279dd57cf24cd35abf2d9&=&format=webp&quality=lossless&width=378&height=424" target="_blank">
+            <img src="https://media.discordapp.net/attachments/1270881377201557504/1364414484881608786/image.png?ex=68099582&is=68084402&hm=0360a7addccaafe78b82d882961431335e531c201ad279dd57cf24cd35abf2d9&=&format=webp&quality=lossless&width=378&height=424" alt="Yousria Mandour" class="w-full h-full object-cover">
+          </a>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-gray-900">YOUSRIA MANDOUR</h3>
+        <p class="text-emerald-600 font-medium mb-4">Chairman of the Board</p>
+        <div class="w-12 h-1 bg-emerald-500 mx-auto mb-4"></div>
+        <p class="text-gray-700 mb-6">
+          Leading Tama Group with vision and strategic direction to ensure continued growth and innovation.
+        </p>
+      </div>
+      
+      <!-- Leader 2 - Sherif -->
+      <div class="bg-white rounded-xl shadow-md p-6 hover-lift text-center">
+        <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6">
+          <a href="https://cdn.discordapp.com/attachments/1270881377201557504/1364414853091037284/image.png?ex=680995da&is=6808445a&hm=bac78bb32c580d84324adeda9f513fe487eb36177b0c8163d8c1119b0454fab1&" target="_blank">
+            <img src="https://cdn.discordapp.com/attachments/1270881377201557504/1364414853091037284/image.png?ex=680995da&is=6808445a&hm=bac78bb32c580d84324adeda9f513fe487eb36177b0c8163d8c1119b0454fab1&" alt="Sherif Salah" class="w-full h-full object-cover">
+          </a>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-gray-900">SHERIF SALAH</h3>
+        <p class="text-emerald-600 font-medium mb-4">General Manager</p>
+        <div class="w-12 h-1 bg-emerald-500 mx-auto mb-4"></div>
+        <p class="text-gray-700 mb-6">
+          Overseeing daily operations and implementing strategic initiatives to achieve company goals.
+        </p>
+      </div>
+      
+      <!-- Leader 3 -->
+      <div class="bg-white rounded-xl shadow-md p-6 hover-lift text-center">
+        <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6">
+          <img src="https://media.discordapp.net/attachments/1270881377201557504/1368562252419960903/1a22bd50-4fdd-454f-9f74-8832f670ac30.jpg?ex=6818ac6b&is=68175aeb&hm=2a5498be96c311aab05a741a8e66d455f14f03b834452f01498cf1218be67fba&=&format=webp&width=385&height=482" alt="Tala Salah" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-gray-900">TALA SALAH</h3>
+        <p class="text-emerald-600 font-medium mb-4">COO</p>
+        <div class="w-12 h-1 bg-emerald-500 mx-auto mb-4"></div>
+        <p class="text-gray-700 mb-6">
+          Managing operational efficiency and driving excellence across all business functions.
+        </p>
+      </div>
+      
+      <!-- Leader 4 -->
+      <div class="bg-white rounded-xl shadow-md p-6 hover-lift text-center">
+        <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6">
+          <img src="/placeholder.svg?height=128&width=128" alt="Mona Hassan" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-gray-900">MONA HASSAN</h3>
+        <p class="text-emerald-600 font-medium mb-4">HR Manager</p>
+        <div class="w-12 h-1 bg-emerald-500 mx-auto mb-4"></div>
+        <p class="text-gray-700 mb-6">
+          Building and nurturing a talented team while fostering a positive workplace culture.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Services Section -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+      <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium mb-6">Our Expertise</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+        Core <span class="text-gradient">Services</span>
+      </h2>
+      <p class="text-lg text-gray-700">
+        Discover our comprehensive range of healthcare solutions designed to meet the diverse needs of our clients.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in">
+      <!-- Service 1 -->
+      <div class="bg-white rounded-xl shadow-md p-8 hover-lift">
+        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6 text-emerald-600">
+          <i class="fas fa-flask text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-4 text-gray-900">Pharmaceutical Excipients</h3>
+        <p class="text-gray-700 mb-6">
+          We provide a comprehensive range of high-quality excipients essential for pharmaceutical formulation, including binders, disintegrants, lubricants, and coating agents.
+        </p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Microcrystalline Cellulose</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Croscarmellose Sodium</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Coating Systems & Film Formers</span>
+          </li>
+        </ul>
+        <a href="excipients.html" class="inline-flex items-center text-emerald-600 font-medium hover:text-emerald-700 transition-colors duration-300 group">
+          <span>Learn More</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+      
+      <!-- Service 2 -->
+      <div class="bg-white rounded-xl shadow-md p-8 hover-lift">
+        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6 text-emerald-600">
+          <i class="fas fa-capsules text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-4 text-gray-900">Active Pharmaceutical Ingredients</h3>
+        <p class="text-gray-700 mb-6">
+          Our APIs meet the highest quality standards and regulatory requirements, serving pharmaceutical manufacturers in the production of various therapeutic formulations.
+        </p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Antibiotics & Anti-infectives</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Cardiovascular Agents</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Anti-inflammatory Compounds</span>
+          </li>
+        </ul>
+        <a href="apis.html" class="inline-flex items-center text-emerald-600 font-medium hover:text-emerald-700 transition-colors duration-300 group">
+          <span>Learn More</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+      
+      <!-- Service 3 -->
+      <div class="bg-white rounded-xl shadow-md p-8 hover-lift">
+        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6 text-emerald-600">
+          <i class="fas fa-pump-medical text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-4 text-gray-900">Mediclean Solutions</h3>
+        <p class="text-gray-700 mb-6">
+          Our specialized Mediclean product line offers advanced sanitization and disinfection solutions for healthcare facilities, ensuring safe environments for patients and staff.
+        </p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Surface Disinfectants</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Hand Sanitizers & Hygiene Products</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+            <span class="text-gray-700">Specialized Cleaning Solutions</span>
+          </li>
+        </ul>
+        <a href="mediclean.html" class="inline-flex items-center text-emerald-600 font-medium hover:text-emerald-700 transition-colors duration-300 group">
+          <span>Learn More</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-20 bg-gradient text-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+      <span class="inline-block px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6">Client Success</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">
+        What Our <span class="relative inline-block">
+          <span class="relative z-10">Clients Say</span>
+          <span class="absolute bottom-2 left-0 w-full h-3 bg-white/30 -z-10 transform -rotate-1"></span>
+        </span>
+      </h2>
+      <p class="text-lg opacity-90">
+        Don't just take our word for it – hear from some of our valued clients about their experience working with Tama Group.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <!-- Testimonial 1 -->
+      <div class="bg-white/10 backdrop-blur-sm p-8 rounded-xl animate-fade-in">
+        <div class="flex items-center mb-6">
+          <div class="w-14 h-14 bg-white/10 rounded-full overflow-hidden mr-4">
+            <img src="/placeholder.svg?height=56&width=56" alt="Client Portrait" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h3 class="font-bold text-xl">Dr. Ahmed Mohammed</h3>
+            <p class="opacity-80 text-sm">Procurement Director, Cairo Medical Center</p>
+          </div>
+        </div>
+        <p class="opacity-90 mb-6 leading-relaxed">
+          "Tama Group has been our trusted supplier for over a decade. Their pharmaceutical excipients consistently meet our quality requirements, and their technical support team is always ready to assist with any questions. Their reliability and commitment to excellence have made them an invaluable partner in our operations."
+        </p>
+        <div class="flex text-emerald-300">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      
+      <!-- Testimonial 2 -->
+      <div class="bg-white/10 backdrop-blur-sm p-8 rounded-xl animate-fade-in">
+        <div class="flex items-center mb-6">
+          <div class="w-14 h-14 bg-white/10 rounded-full overflow-hidden mr-4">
+            <img src="/placeholder.svg?height=56&width=56" alt="Client Portrait" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h3 class="font-bold text-xl">Fatima Al-Saeed</h3>
+            <p class="opacity-80 text-sm">CEO, Gulf Pharmaceutical Industries</p>
+          </div>
+        </div>
+        <p class="opacity-90 mb-6 leading-relaxed">
+          "As a pharmaceutical manufacturer, we demand the highest quality ingredients. Tama Group not only meets these standards but exceeds them with their exceptional service and technical expertise. Their team's knowledge of formulation challenges has helped us develop better products and streamline our processes."
+        </p>
+        <div class="flex text-emerald-300">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      
+      <!-- Testimonial 3 -->
+      <div class="bg-white/10 backdrop-blur-sm p-8 rounded-xl animate-fade-in">
+        <div class="flex items-center mb-6">
+          <div class="w-14 h-14 bg-white/10 rounded-full overflow-hidden mr-4">
+            <img src="/placeholder.svg?height=56&width=56" alt="Client Portrait" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h3 class="font-bold text-xl">Dr. Omar Khalidi</h3>
+            <p class="opacity-80 text-sm">Head of Infection Control, Royal Hospital</p>
+          </div>
+        </div>
+        <p class="opacity-90 mb-6 leading-relaxed">
+          "The Mediclean product line from Tama Group has revolutionized our sanitization protocols. During the pandemic, they ensured we had uninterrupted supply despite global shortages, demonstrating their commitment to healthcare providers. Their products' efficacy and safety profiles are outstanding."
+        </p>
+        <div class="flex text-emerald-300">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient rounded-3xl p-12 text-white text-center animate-fade-in">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">
+        Ready to Partner with <span class="relative inline-block">
+          <span class="relative z-10">Tama Group</span>
+          <span class="absolute bottom-2 left-0 w-full h-3 bg-white/30 -z-10 transform -rotate-1"></span>
+        </span>?
+      </h2>
+      <p class="text-xl opacity-90 mb-10 max-w-2xl mx-auto">
+        Join hundreds of healthcare providers and manufacturers who trust Tama Group for their pharmaceutical and healthcare needs.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="contact-us.html" class="btn-white py-4 px-8 rounded-full font-medium text-lg flex items-center justify-center">
+          Contact Us Today
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        </a>
+        <a href="products.html" class="btn-primary py-4 px-8 rounded-full font-medium text-lg flex items-center justify-center shadow-green-glow">
+          Explore Our Products
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <!-- Company Info -->
+      <div>
+        <div class="flex items-center mb-6">
+          <h3 class="text-2xl font-bold logo-text">TAMA GROUP</h3>
+        </div>
+        <p class="text-gray-400 mb-6 leading-relaxed">
+          Specialized healthcare solutions since 1990. Serving the healthcare sector with excellence and innovation.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="bg-gray-800 hover:bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="index.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="who-we-are.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              Who We Are?
+            </a>
+          </li>
+          <li>
+            <a href="about-us.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              About Us
+            </a>
+          </li>
+          <li>
+            <a href="marketing.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              Marketing
+            </a>
+          </li>
+          <li>
+            <a href="contact-us.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Products -->
+      <div>
+        <h3 class="text-xl font-bold mb-6">Our Products</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="excipients.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              Excipients
+            </a>
+          </li>
+          <li>
+            <a href="apis.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              APIs
+            </a>
+          </li>
+          <li>
+            <a href="mediclean.html" class="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              Mediclean
+            </a>
+          </li>
+        </ul>
+        
+        <h3 class="text-xl font-bold mt-8 mb-6">Newsletter</h3>
+        <form class="flex">
+          <input type="email" placeholder="Your email" class="bg-gray-800 text-white px-4 py-2 rounded-l-lg w-full focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-r-lg transition-colors duration-300">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+      
+      <!-- Contact Info -->
+      <div>
+        <h3 class="text-xl font-bold mb-6">Contact Us</h3>
+        <ul class="space-y-4">
+          <li class="flex items-start">
+            <i class="fas fa-map-marker-alt mt-1 mr-3 text-emerald-500"></i>
+            <span class="text-gray-400">123 Healthcare Street, Cairo, Egypt</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-phone-alt mr-3 text-emerald-500"></i>
+            <span class="text-gray-400">+20 123 456 7890</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-envelope mr-3 text-emerald-500"></i>
+            <span class="text-gray-400">info@tamagroup-eg.com</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-clock mr-3 text-emerald-500"></i>
+            <span class="text-gray-400">Mon-Fri: 9:00 AM - 5:00 PM</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+      <p class="text-gray-400">&copy; 2023 Tama Group. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top bg-emerald-600 hover:bg-emerald-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- JavaScript -->
+<script>
+// Mobile Menu Toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileProductsButton = document.getElementById('mobile-products-button');
+const mobileProductsMenu = document.getElementById('mobile-products-menu');
+
+mobileMenuButton.addEventListener('click', () => {
+  mobileMenu.classList.toggle('hidden');
+});
+
+if (mobileProductsButton) {
+  mobileProductsButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    mobileProductsMenu.classList.toggle('hidden');
+    mobileProductsButton.querySelector('svg').classList.toggle('rotate-180');
+  });
+}
+
+// Add this to ensure dropdowns work properly on touch devices
+document.addEventListener('DOMContentLoaded', () => {
+  // For touch devices, make dropdown work with click
+  if ('ontouchstart' in window) {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    dropdowns.forEach(dropdown => {
+      const button = dropdown.querySelector('button');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Close all other dropdowns
+        dropdowns.forEach(d => {
+          if (d !== dropdown) {
+            d.classList.remove('active');
+          }
+        });
+        
+        dropdown.classList.toggle('active');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.remove('active');
+      });
+    });
+  }
+});
+
+// Scroll Animation
+document.addEventListener('DOMContentLoaded', () => {
+  const animateElements = document.querySelectorAll('.animate-fade-in');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  animateElements.forEach(element => {
+    observer.observe(element);
+  });
+
+  // FAQ Accordion
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('i');
+      
+      content.classList.toggle('open');
+      icon.classList.toggle('transform');
+      icon.classList.toggle('rotate-180');
+    });
+  });
+
+  // Back to Top Button
+  const backToTopButton = document.getElementById('back-to-top');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopButton.classList.add('visible');
+    } else {
+      backToTopButton.classList.remove('visible');
+    }
+  });
+  
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+
+// Header Scroll Effect
+const header = document.querySelector('.sticky-header');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+</script>
+</body>
+</html>
